@@ -1,0 +1,7 @@
+# Coverage test
+.nyc_output
+
+# Package source
+node_modules
+
+package-lock.json
