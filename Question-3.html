@@ -1,0 +1,84 @@
+<html>
+
+<body>
+<script>
+
+const Mode = {
+    ONLINE: 'online',
+    OFFLINE: 'offline'
+}
+
+const Type = {
+    EMPLOYEE: 'Employee',
+    AFFILIATE: 'affiliate',
+    CUSTOMER: 'customer'
+}
+
+const Discount = {
+    PER30: 30 / 100,
+    PER10: 10 / 100,
+    PER5: 5 / 100
+}
+
+class Member {
+    type = null;
+    avenue = 0;
+
+    constructor(type, year) {
+        this.type = type;
+        this.avenue = year;
+    }
+}
+
+class Bill {
+    mode = null;
+    member = null;
+
+    constructor(member) {
+        this.member = member;
+    }
+
+    discount(mode, cash) {
+        let result = 0;
+        if (Mode.ONLINE == mode) {
+            // cash_discount = cash - (cast * %discount);
+            switch (member.type) {
+                case Type.EMPLOYEE:
+                    result = cash - (cash * Discount.PER30);
+                    break;
+                case Type.AFFILIATE:
+                    result = cash - (cash * Discount.PER10);
+                    break;
+                case Type.CUSTOMER:
+                    if (member.avenue >= 2)
+                        result = cash - (cash * Discount.PER5);
+                    else
+                        result = cash;
+                    break;
+                default:
+                    result = cash;
+            }
+        }
+
+        const cash_redue = Math.ceil(cash / 100) * 5;
+        result -= cash_redue;
+        return result;
+    }
+}
+
+function main3(mode, member, cash = 0)
+{
+    if (member instanceof Object) {
+        let bill = new Bill(member);
+        let bill_dis = bill.discount(mode, cash);
+        return bill_dis;
+    }
+}
+
+const cash = 990;
+const member = new Member(Type.CUSTOMER, 5);
+const cash_discount = main3(Mode.ONLINE, member, cash);
+document.write("Cash has discounted: " + cash_discount);
+</script>
+</body>
+</html>
