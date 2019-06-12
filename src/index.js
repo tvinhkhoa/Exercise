@@ -50,8 +50,7 @@ function main3() {
 
     const discount = bill.getDiscount();
     const cashPayable = bill.getCashPayable(discount);
-    console.log(discount);
-    console.log('Cash pay: ', cashPayable);
+    console.log('Payment: ', cashPayable);
 }
 
 main1();
