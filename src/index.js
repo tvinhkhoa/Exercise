@@ -60,4 +60,4 @@ console.log("\n");
 // main2();
 console.log("\n");
 
-// main3();
+main3();
