@@ -8,12 +8,21 @@ module.exports = {
         arr.map((item, key) => {
             let sep = '';
             if (text) text += '\n';
-            for (const [k, val] of Object.entries(item)) {
-                if (!sep)
-                    sep += k + '=' + val;
-                else
-                    sep += ';' + k + '=' + val;
-            };
+            // for (const [k, val] of Object.entries(item)) {
+            //     if (!sep)
+            //         sep += k + '=' + val;
+            //     else
+            //         sep += ';' + k + '=' + val;
+            // };
+
+            Object.keys(item).map( k => {
+                if (item[k]) {
+                    if (!sep)
+                        sep += k + '=' + item[k];
+                    else
+                        sep += ';' + k + '=' + item[k];
+                }
+            });
             text += sep;
         });
         return text;

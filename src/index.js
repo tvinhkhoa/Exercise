@@ -1,6 +1,9 @@
 import { store, load } from './q1';
 import { Graph } from './q2';
-import { Type, Mode, Member, Bill } from './q3';
+
+import { Member } from './q3/member';
+import { Mode, Type, DiscountType, Seller } from './q3/constant';
+import { Bill } from './q3/bill';
 
 // Question 1
 function main1() {
@@ -36,20 +39,25 @@ function main2() {
 // Question 3
 function main3() {
     const cash = 990;
-    const member = new Member(Type.AFFILIATE, 5);
+    const seller = Seller.WEBSITE;
+    const member = new Member({
+        name: 'Tester',
+        type: Type.ANONYMOUS,
+        joinAt: new Date('2015-05-17')
+    });
 
-    if (member instanceof Object) {
-        let bill = new Bill(member, Mode.ONLINE);
-        
-        let bill_dis = bill.discount(cash);
-        console.log("Cash has discounted: " + bill_dis);
-    }
+    let bill = new Bill(member, cash, seller);
+
+    const discount = bill.getDiscount();
+    const cashPayable = bill.getCashPayable(discount);
+    console.log(discount);
+    console.log('Cash pay: ', cashPayable);
 }
 
 main1();
 console.log("\n");
 
-main2();
+// main2();
 console.log("\n");
 
-main3();
+// main3();
